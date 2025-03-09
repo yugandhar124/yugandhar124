@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ poll.question }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>{{ poll.question }}</h1>
+    <form method="post">
+        {% for index, option in options_with_indices %}
+            <input type="radio" name="option" value="{{ index }}"> {{ option }}<br>
+        {% endfor %}
+        <input type="submit" value="Vote">
+    </form>
+    <h2>Results</h2>
+    <ul>
+        {% for index, option in options_with_indices %}
+            <li>{{ option }}: {{ poll.votes[index] }} votes</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to Polls</a>
+</body>
+</html>
